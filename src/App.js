@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import { useState } from "react";
+import Offer from "./pages/Offer";
 
 function App() {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Router>
+      <header>
+        <Header />
       </header>
-    </div>
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              setIsLoading={setIsLoading}
+              isLoading={isLoading}
+              setData={setData}
+              data={data}
+            />
+          }
+        />
+        <Route path={`/offer/:id`} element={<Offer />} />
+      </Routes>
+    </Router>
   );
 }
 
