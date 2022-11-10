@@ -31,6 +31,7 @@ const Header = ({ handleShow, handleShow1, token, setToken }) => {
                 variant="danger m-1"
                 onClick={() => {
                   Cookies.remove("token");
+                  setToken(null);
                 }}
               >
                 Se deconnecter
