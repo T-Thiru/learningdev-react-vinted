@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const Home = ({ setIsLoading, isLoading, setData, data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [range, setRange] = useState(8);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -83,7 +84,6 @@ const Home = ({ setIsLoading, isLoading, setData, data }) => {
           })}
         </div>
       </section>
-      <footer></footer>
     </main>
   );
 };

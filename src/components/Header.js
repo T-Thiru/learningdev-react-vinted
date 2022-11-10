@@ -18,21 +18,25 @@ const Header = () => {
           </Form.Group>
         </div>
         <div className="navigation">
-          <Button variant="outline-info m-1">Sinscrire</Button>
-          <Button variant="outline-info m-1">Se connecter</Button>
+          <Link to="/signup">
+            <Button variant="outline-info m-1">Sinscrire</Button>
+          </Link>
+          <Link to="/login">
+            <Button variant="outline-info m-1">Se connecter</Button>
+          </Link>
           <Button variant="info m-1" style={{ color: "white" }}>
             Vend tes articles
           </Button>
         </div>
       </div>
-      <div className="navBar">
+      {/* <div className="navBar">
         <Link to="/">
           <Button variant="outline-secondary m-1">HOME</Button>
         </Link>
         <Link to="/offer/:id">
           <Button variant="outline-secondary m-1">OFFERS</Button>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

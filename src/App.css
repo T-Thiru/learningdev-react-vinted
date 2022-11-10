@@ -2,6 +2,13 @@
   box-sizing: border-box;
 }
 
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+}
+
 .wrapper {
   max-width: 1240px;
   margin: 0 auto;
@@ -139,7 +146,7 @@
   height: 70px;
   width: 70px;
   object-fit: cover;
-  margin-right: 10px;
+  margin: 10px 10px 10px 0;
 }
 
 .pagination {
@@ -149,8 +156,22 @@
 
 footer {
   height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .inputRange {
-  margin: 20px;
+  margin: 20px 0;
+}
+
+.signUp-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.container-form {
+  width: 30vw;
 }
