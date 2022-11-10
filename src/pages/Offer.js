@@ -31,7 +31,7 @@ const Offer = () => {
     <div>
       <div className="offer-container wrapper">
         <div className="offer-pic">
-          <img src={dataOffer.product_image.url} alt="" />
+          <img src={dataOffer.product_image.secure_url} alt="" />
         </div>
         <div className="detail">
           <span className="price">

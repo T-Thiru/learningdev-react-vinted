@@ -14,7 +14,7 @@ const Card = ({ offre }) => {
           <span>{offre.owner?.account?.username}</span>
         </div>
         <div className="offer-detail">
-          <img src={offre.product_image.url} alt="" />
+          <img src={offre.product_image.secure_url} alt="" />
           <div className="price-detail">
             <span>{offre.product_price}$</span>
             <span>{offre.product_details[1].TAILLE}</span>

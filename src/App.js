@@ -54,7 +54,7 @@ function App() {
           path="/signup"
           element={<SignUp token={token} setToken={setToken} />}
         />
-        <Route path="/login" element={<LogIn />} />
+        <Route path="/login" element={<LogIn setToken={setToken} />} />
       </Routes>
       <Modal
         show={show}
@@ -64,7 +64,11 @@ function App() {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <SignUp handleShow1={handleShow1} handleClose={handleClose} />
+          <SignUp
+            handleShow1={handleShow1}
+            handleClose={handleClose}
+            setToken={setToken}
+          />
         </Modal.Body>
       </Modal>
       <Modal
@@ -75,7 +79,11 @@ function App() {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <LogIn handleShow={handleShow} handleClose1={handleClose1} />
+          <LogIn
+            handleShow={handleShow}
+            handleClose1={handleClose1}
+            setToken={setToken}
+          />
         </Modal.Body>
       </Modal>
       <footer>
