@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-const Header = () => {
+import Cookies from "js-cookie";
+
+const Header = ({ handleShow, handleShow1, token, setToken }) => {
   return (
     <div className="wrapper">
       <div className="container-header">
@@ -18,11 +20,26 @@ const Header = () => {
           </Form.Group>
         </div>
         <div className="navigation">
-          <Link to="/signup">
-            <Button variant="outline-info m-1">Sinscrire</Button>
+          <Link>
+            <Button variant="outline-info m-1" onClick={handleShow}>
+              Sinscrire
+            </Button>
           </Link>
-          <Link to="/login">
-            <Button variant="outline-info m-1">Se connecter</Button>
+          <Link>
+            {token ? (
+              <Button
+                variant="danger m-1"
+                onClick={() => {
+                  Cookies.remove("token");
+                }}
+              >
+                Se deconnecter
+              </Button>
+            ) : (
+              <Button variant="outline-info m-1" onClick={handleShow1}>
+                Se connecter
+              </Button>
+            )}
           </Link>
           <Button variant="info m-1" style={{ color: "white" }}>
             Vend tes articles

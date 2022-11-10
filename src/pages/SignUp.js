@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
-const SignUp = ({ token, setToken }) => {
+const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -96,6 +97,14 @@ const SignUp = ({ token, setToken }) => {
             >
               S'inscrire
             </Button>
+            <Link
+              onClick={() => {
+                handleShow1();
+                handleClose();
+              }}
+            >
+              Tu as deja un compte? connecte-toi!
+            </Link>
           </Form>
         </div>
       </div>

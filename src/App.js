@@ -7,17 +7,30 @@ import { useState } from "react";
 import Offer from "./pages/Offer";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
+import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
 
 function App() {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(Cookies.get("token") || null);
+  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = () => setShow1(true);
 
   return (
     <Router>
       <header>
-        <Header />
+        <Header
+          handleShow={handleShow}
+          handleShow1={handleShow1}
+          token={token}
+          setToken={setToken}
+        />
       </header>
 
       <Routes>
@@ -29,6 +42,10 @@ function App() {
               isLoading={isLoading}
               setData={setData}
               data={data}
+              show={show}
+              setShow={setShow}
+              handleClose={handleClose}
+              handleShow={handleShow}
             />
           }
         />
@@ -39,6 +56,28 @@ function App() {
         />
         <Route path="/login" element={<LogIn />} />
       </Routes>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <SignUp handleShow1={handleShow1} handleClose={handleClose} />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={show1}
+        onHide={handleClose1}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <LogIn handleShow={handleShow} handleClose1={handleClose1} />
+        </Modal.Body>
+      </Modal>
       <footer>
         <p>Made at le Reacteur by Thiru - 2022</p>
       </footer>
