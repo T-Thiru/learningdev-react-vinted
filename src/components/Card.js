@@ -10,7 +10,10 @@ const Card = ({ offre }) => {
     >
       <div className="card-container">
         <div className="avatar">
-          <img src={offre.owner?.account?.avatar?.url} alt="avatar-user" />
+          <img
+            src={offre.owner?.account?.avatar?.secure_url}
+            alt={offre.owner?.account.username}
+          />
           <span>{offre.owner?.account?.username}</span>
         </div>
         <div className="offer-detail">

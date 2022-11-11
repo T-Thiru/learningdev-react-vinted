@@ -12,25 +12,28 @@ const LogIn = ({ handleShow, handleClose1, token, setToken }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const logIndetail = {
-      email: email,
-      password: password,
-    };
     try {
+      e.preventDefault();
+
+      const logIndetail = {
+        email: email,
+        password: password,
+      };
       const resToken = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/login",
         logIndetail
       );
-      console.log(resToken.data);
-      setToken(resToken.data.token);
-      Cookies.set("token", token, { expires: 7 });
+      // console.log(resToken.data);
+      if (resToken.data.token) {
+        setToken(resToken.data.token);
+        Cookies.set("token", token, { expires: 7 });
+        navigate("/");
+        handleClose1();
+      }
     } catch (error) {
       console.log(error.message);
       console.log(error.resToken.data);
     }
-    navigate("/");
   };
 
   return (

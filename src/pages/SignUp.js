@@ -4,33 +4,41 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const signUpdetail = {
-      email: email,
-      username: username,
-      password: password,
-      newsletter: newsletter,
-    };
     try {
+      e.preventDefault();
+
+      const signUpdetail = {
+        email: email,
+        username: username,
+        password: password,
+        newsletter: newsletter,
+      };
       const resToken = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/signup",
         signUpdetail
       );
-      console.log(resToken.data);
-      setToken(resToken.data.token);
-      Cookies.set("token", token, { expires: 7 });
+      // console.log(resToken.data);
+      if (resToken.data.token) {
+        setToken(resToken.data.token);
+        Cookies.set("token", token, { expires: 7 });
+        navigate("/");
+        handleClose();
+      }
     } catch (error) {
       console.log(error.message);
       console.log(error.resToken.data);
+      // if (error.resToken.data) setErrorMsg(error.resToken.data);
     }
   };
 
@@ -106,6 +114,7 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
             >
               Tu as deja un compte? connecte-toi!
             </Link>
+            <p style={{ color: "red" }}>{errorMsg}</p>
           </Form>
         </div>
       </div>

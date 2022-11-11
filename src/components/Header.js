@@ -5,7 +5,14 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Cookies from "js-cookie";
 
-const Header = ({ handleShow, handleShow1, token, setToken }) => {
+const Header = ({
+  handleShow,
+  handleShow1,
+  token,
+  setToken,
+  searchValue,
+  setSearchValue,
+}) => {
   return (
     <div className="wrapper">
       <div className="container-header">
@@ -15,8 +22,15 @@ const Header = ({ handleShow, handleShow1, token, setToken }) => {
           </div>
         </Link>
         <div className="searchBar">
-          <Form.Group className="mb-3 search" controlId="formBasicEmail">
-            <Form.Control type="search" placeholder="Recherche des articles" />
+          <Form.Group className="mb-3 search">
+            <Form.Control
+              type="search"
+              placeholder="Recherche des articles"
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+            />
           </Form.Group>
         </div>
         <div className="navigation">

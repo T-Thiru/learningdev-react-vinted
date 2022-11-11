@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-
+import Form from "react-bootstrap/Form";
 import Bannier from "../components/Bannier";
 import Card from "../components/Card";
 import { Link } from "react-router-dom";
 
-const Home = ({ setIsLoading, isLoading, setData, data }) => {
+const Home = ({ setIsLoading, isLoading, setData, data, searchValue }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [range, setRange] = useState(8);
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState(500);
+  const [priceOrder, setPriceOrder] = useState("price-asc");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers?page=${currentPage}&limit=${range}`
+          `https://lereacteur-vinted-api.herokuapp.com/offers?title=${searchValue}&priceMin=${priceMin}&priceMax=${priceMax}&sort=${priceOrder}&page=${currentPage}&limit=${range}`
         );
         // const pages = [];
 
@@ -26,7 +29,16 @@ const Home = ({ setIsLoading, isLoading, setData, data }) => {
     };
 
     fetchData();
-  }, [setData, setIsLoading, currentPage, range]);
+  }, [
+    setData,
+    setIsLoading,
+    currentPage,
+    range,
+    searchValue,
+    priceMin,
+    priceMax,
+    priceOrder,
+  ]);
 
   const pages = [];
   if (!isLoading) {
@@ -45,22 +57,66 @@ const Home = ({ setIsLoading, isLoading, setData, data }) => {
       <Bannier />
 
       <section className="section-offer wrapper">
-        <div className="inputRange">
-          <input
-            id="rangeOffer"
-            type="range"
-            min="1"
-            max="38"
-            defaultValue={range}
-            onChange={(e) => {
-              console.log(e.target);
-              setRange(e.target.value);
-            }}
-          />
-          <label htmlFor="rangeOffer">
-            Nombre d'offres à afficher : {range}
-          </label>
+        <div className="fliter-container">
+          <div className="inputRange">
+            <label htmlFor="rangeOffer">
+              Nombre d'offres à afficher : {range}
+            </label>
+            <input
+              id="rangeOffer"
+              type="range"
+              min="1"
+              max="38"
+              defaultValue={range}
+              onChange={(e) => {
+                // console.log(e.target);
+                setRange(e.target.value);
+              }}
+            />
+          </div>
+
+          <Form>
+            <div className="priceOrder">
+              <Form.Label htmlFor="custom-switch">Prix croissant</Form.Label>
+              <Form.Check
+                type="switch"
+                id="custom-switch"
+                onChange={(e) => {
+                  if (priceOrder === "price-asc") setPriceOrder("price-desc");
+                  if (priceOrder === "price-desc") setPriceOrder("price-asc");
+                }}
+              />
+              <Form.Label htmlFor="custom-switch">Prix décroissant</Form.Label>
+            </div>
+          </Form>
+          <div className="priceRange">
+            <label htmlFor="minPrice">Prix min : {priceMin}$</label>
+            <input
+              className="priceMin"
+              id="minPrice"
+              type="range"
+              min="0"
+              max="500"
+              defaultValue={priceMin}
+              onChange={(e) => {
+                setPriceMin(e.target.value);
+              }}
+            />
+            <input
+              className="priceMax"
+              id="maxPrice"
+              type="range"
+              min="0"
+              max="500"
+              defaultValue={priceMax}
+              onChange={(e) => {
+                setPriceMax(e.target.value);
+              }}
+            />
+            <label htmlFor="maxPrice">Prix max : {priceMax}$</label>
+          </div>
         </div>
+
         <div className="display-cards">
           {data.offers.map((offre, index) => {
             return <Card key={index} offre={offre} />;
@@ -82,6 +138,7 @@ const Home = ({ setIsLoading, isLoading, setData, data }) => {
               </Link>
             );
           })}
+          <span>Pages</span>
         </div>
       </section>
     </main>

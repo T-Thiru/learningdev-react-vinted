@@ -167,10 +167,6 @@ footer {
   align-items: center;
 }
 
-.inputRange {
-  margin: 20px 0;
-}
-
 .signUp-form {
   display: flex;
   justify-content: center;
@@ -181,3 +177,35 @@ footer {
 .container-form {
   width: 30vw;
 }
+
+.fliter-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.inputRange {
+  display: flex;
+  gap: 10px;
+}
+
+.priceOrder {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.priceRange {
+  display: flex;
+  align-items: baseline;
+  position: relative;
+  gap: 10px;
+}
+
+/* .priceMin {
+  position: absolute;
+}
+
+.priceMax {
+  position: absolute;
+} */

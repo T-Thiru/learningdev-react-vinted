@@ -33,17 +33,25 @@ const Offer = () => {
       <div className="offer-container wrapper">
         <div className="offer-pic">
           <Carousel>
-            {dataOffer.product_pictures.map((pics, i) => {
-              return (
-                <Carousel.Item key={i}>
-                  <img
-                    className="d-block w-100"
-                    src={pics.secure_url}
-                    alt="photos produits"
-                  />
-                </Carousel.Item>
-              );
-            })}
+            {dataOffer.product_pictures.length <= 0 ? (
+              <img
+                className="d-block w-100"
+                src={dataOffer.product_image.secure_url}
+                alt="photos-produits"
+              />
+            ) : (
+              dataOffer.product_pictures.map((pics, i) => {
+                return (
+                  <Carousel.Item key={i}>
+                    <img
+                      className="d-block w-100"
+                      src={pics.secure_url}
+                      alt="photos-produits"
+                    />
+                  </Carousel.Item>
+                );
+              })
+            )}
           </Carousel>
         </div>
         <div className="detail">

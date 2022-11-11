@@ -16,6 +16,7 @@ function App() {
   const [token, setToken] = useState(Cookies.get("token") || null);
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,6 +31,8 @@ function App() {
           handleShow1={handleShow1}
           token={token}
           setToken={setToken}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
         />
       </header>
 
@@ -46,6 +49,7 @@ function App() {
               setShow={setShow}
               handleClose={handleClose}
               handleShow={handleShow}
+              searchValue={searchValue}
             />
           }
         />
