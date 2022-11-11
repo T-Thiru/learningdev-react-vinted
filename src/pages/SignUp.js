@@ -11,7 +11,7 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorSignIn, setErrorSignIn] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -34,11 +34,16 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
         Cookies.set("token", token, { expires: 7 });
         navigate("/");
         handleClose();
+        setErrorSignIn("");
       }
     } catch (error) {
       console.log(error.message);
-      console.log(error.resToken.data);
-      // if (error.resToken.data) setErrorMsg(error.resToken.data);
+      console.log(error.response.status);
+      console.log(error.response.data);
+      if (error.response.status === 400)
+        setErrorSignIn("Veuillez remplire tous les champs");
+      if (error.response.status === 409)
+        setErrorSignIn("Cet adresse mail existe déjà");
     }
   };
 
@@ -114,7 +119,7 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
             >
               Tu as deja un compte? connecte-toi!
             </Link>
-            <p style={{ color: "red" }}>{errorMsg}</p>
+            <p style={{ color: "red" }}>{errorSignIn}</p>
           </Form>
         </div>
       </div>

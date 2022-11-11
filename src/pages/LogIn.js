@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const LogIn = ({ handleShow, handleClose1, token, setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorLogIn, setErrorLogIn] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,10 +30,16 @@ const LogIn = ({ handleShow, handleClose1, token, setToken }) => {
         Cookies.set("token", token, { expires: 7 });
         navigate("/");
         handleClose1();
+        setErrorLogIn("");
       }
     } catch (error) {
       console.log(error.message);
-      console.log(error.resToken.data);
+      console.log(error.response.data);
+      if (error.response.status === 401)
+        setErrorLogIn("identifiant ou Mot de passe incorrect");
+      console.log(error.response.data);
+      if (error.response.status === 400)
+        setErrorLogIn("Ce compte n'existe pas");
     }
   };
 
@@ -82,6 +89,7 @@ const LogIn = ({ handleShow, handleClose1, token, setToken }) => {
               Pas encore de compte? Inscris-toi !
             </Link>
           </Form>
+          <p style={{ color: "red" }}>{errorLogIn}</p>
         </div>
       </div>
     </div>
