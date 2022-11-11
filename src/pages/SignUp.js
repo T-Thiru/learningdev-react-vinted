@@ -30,6 +30,7 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
       Cookies.set("token", token, { expires: 7 });
     } catch (error) {
       console.log(error.message);
+      console.log(error.resToken.data);
     }
   };
 

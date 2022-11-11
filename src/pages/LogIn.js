@@ -4,10 +4,12 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = ({ handleShow, handleClose1, token, setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +28,9 @@ const LogIn = ({ handleShow, handleClose1, token, setToken }) => {
       Cookies.set("token", token, { expires: 7 });
     } catch (error) {
       console.log(error.message);
+      console.log(error.resToken.data);
     }
+    navigate("/");
   };
 
   return (

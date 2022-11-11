@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import Carousel from "react-bootstrap/Carousel";
 
 const Offer = () => {
   const [dataOffer, setDataOffer] = useState();
@@ -31,7 +32,19 @@ const Offer = () => {
     <div>
       <div className="offer-container wrapper">
         <div className="offer-pic">
-          <img src={dataOffer.product_image.secure_url} alt="" />
+          <Carousel>
+            {dataOffer.product_pictures.map((pics, i) => {
+              return (
+                <Carousel.Item key={i}>
+                  <img
+                    className="d-block w-100"
+                    src={pics.secure_url}
+                    alt="photos produits"
+                  />
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
         </div>
         <div className="detail">
           <span className="price">
