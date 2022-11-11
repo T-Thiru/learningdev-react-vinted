@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Bannier from "../components/Bannier";
 import Card from "../components/Card";
 import { Link } from "react-router-dom";
+import MultiRangeSlider from "multi-range-slider-react";
 
 const Home = ({ setIsLoading, isLoading, setData, data, searchValue }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,30 +90,32 @@ const Home = ({ setIsLoading, isLoading, setData, data, searchValue }) => {
             </div>
           </Form>
           <div className="priceRange">
-            <label htmlFor="minPrice">Prix min : {priceMin}$</label>
-            <input
-              className="priceMin"
-              id="minPrice"
-              type="range"
-              min="0"
-              max="500"
-              defaultValue={priceMin}
+            <span>Prix Min {priceMin}$ :</span>
+            <MultiRangeSlider
+              style={{
+                border: "none",
+                boxShadow: "none",
+                padding: "15px 10px",
+                minWidth: "300px",
+              }}
+              min={0}
+              max={500}
+              step={10}
+              label={false}
+              minValue={priceMin}
+              maxValue={priceMax}
+              ruler="false"
+              barLeftColor="white"
+              barInnerColor="#015CC8"
+              barRightColor="white"
+              thumbLeftColor="#015CC8"
+              thumbRightColor="#015CC8"
               onChange={(e) => {
-                setPriceMin(e.target.value);
+                setPriceMin(e.minValue);
+                setPriceMax(e.maxValue);
               }}
             />
-            <input
-              className="priceMax"
-              id="maxPrice"
-              type="range"
-              min="0"
-              max="500"
-              defaultValue={priceMax}
-              onChange={(e) => {
-                setPriceMax(e.target.value);
-              }}
-            />
-            <label htmlFor="maxPrice">Prix max : {priceMax}$</label>
+            <span>: {priceMax}$ Prix Max</span>
           </div>
         </div>
 

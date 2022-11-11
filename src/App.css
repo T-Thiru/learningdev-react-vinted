@@ -180,7 +180,9 @@ footer {
 
 .fliter-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: baseline;
   margin: 20px 0;
 }
 
@@ -199,14 +201,9 @@ footer {
 .priceRange {
   display: flex;
   align-items: baseline;
-  position: relative;
-  gap: 10px;
 }
 
-/* .priceMin {
-  position: absolute;
+.inputRange {
+  display: flex;
+  align-items: center;
 }
-
-.priceMax {
-  position: absolute;
-} */
