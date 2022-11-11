@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Bannier from "../components/Bannier";
 import Card from "../components/Card";
 import { Link } from "react-router-dom";
-import Range from "../components/Range";
 
 const Home = ({ setIsLoading, isLoading, setData, data, searchValue }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,7 +12,6 @@ const Home = ({ setIsLoading, isLoading, setData, data, searchValue }) => {
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(500);
   const [priceOrder, setPriceOrder] = useState("price-asc");
-  const [state, setState] = useState({ values: [50] });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,16 +55,8 @@ const Home = ({ setIsLoading, isLoading, setData, data, searchValue }) => {
   ) : (
     <main>
       <Bannier />
-
       <section className="section-offer wrapper">
         <div className="fliter-container">
-          <Range
-            step={0.1}
-            min={0}
-            max={100}
-            values={state.values}
-            onChange={(values) => setState({ values })}
-          />
           <div className="inputRange">
             <label htmlFor="rangeOffer">
               Nombre d'offres à afficher : {range}

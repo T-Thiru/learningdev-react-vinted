@@ -9,7 +9,6 @@ import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
-import { Range } from "react-range";
 
 function App() {
   const [data, setData] = useState();
