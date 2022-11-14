@@ -57,12 +57,12 @@ const PublishOffer = ({ token }) => {
       }
     } catch (error) {
       console.log(error.message);
-      //   console.log(error.response.status);
-      //   console.log(error.response.data);
-      //   if (error.response.status === 400)
-      //     setErrorSignIn("Veuillez remplire tous les champs");
-      //   if (error.response.status === 409)
-      //     setErrorSignIn("Cet adresse mail existe déjà");
+      console.log(error.response.status);
+      console.log(error.response.data);
+      if (error.response.status === 400)
+        setErrorSignIn("Veuillez remplire tous les champs");
+      if (error.response.status === 409)
+        setErrorSignIn("Cet adresse mail existe déjà");
     }
   };
 
