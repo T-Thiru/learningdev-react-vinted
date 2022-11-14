@@ -12,21 +12,25 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
   const [errorSignIn, setErrorSignIn] = useState("");
+  const [profilPic, setProfilPic] = useState();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
 
-      const signUpdetail = {
-        email: email,
-        username: username,
-        password: password,
-        newsletter: newsletter,
-      };
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("username", username);
+      formData.append("password", password);
+      formData.append("newsletter", newsletter);
+      if (profilPic) {
+        formData.append("picture", profilPic);
+      }
+
       const resToken = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        signUpdetail
+        formData
       );
       // console.log(resToken.data);
       if (resToken.data.token) {
@@ -62,6 +66,15 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Ajouter une photo de profile</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={(e) => {
+                  setProfilPic(e.target.files[0]);
                 }}
               />
             </Form.Group>

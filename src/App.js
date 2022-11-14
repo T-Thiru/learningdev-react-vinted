@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
+import PublishOffer from "./pages/PublishOffer";
 
 function App() {
   const [data, setData] = useState();
@@ -54,11 +55,24 @@ function App() {
           }
         />
         <Route path={`/offer/:id`} element={<Offer />} />
-        <Route
+        {/* <Route
           path="/signup"
           element={<SignUp token={token} setToken={setToken} />}
         />
-        <Route path="/login" element={<LogIn setToken={setToken} />} />
+        <Route path="/login" element={<LogIn setToken={setToken} />} /> */}
+        {/* {Cookies.get("token") ? */}
+        <Route
+          path="/publish"
+          element={
+            Cookies.get("token") ? (
+              <PublishOffer token={token} />
+            ) : (
+              <SignUp token={token} setToken={setToken} />
+            )
+          }
+        />
+
+        {/* <Route path="/publish" element={<PublishOffer />} /> */}
       </Routes>
       <Modal
         show={show}

@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import Form from "react-bootstrap/Form";
+
 import Bannier from "../components/Bannier";
 import Card from "../components/Card";
 import { Link } from "react-router-dom";
-import MultiRangeSlider from "multi-range-slider-react";
 
-const Home = ({ setIsLoading, isLoading, setData, data, searchValue }) => {
+import FilterBar from "../components/FilterBar";
+
+const Home = ({
+  setIsLoading,
+  isLoading,
+  setData,
+  data,
+  searchValue,
+  handleShow,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [range, setRange] = useState(8);
   const [priceMin, setPriceMin] = useState(0);
@@ -55,69 +63,18 @@ const Home = ({ setIsLoading, isLoading, setData, data, searchValue }) => {
     <p>LOADING...</p>
   ) : (
     <main>
-      <Bannier />
+      <Bannier handleShow={handleShow} />
       <section className="section-offer wrapper">
-        <div className="fliter-container">
-          <div className="inputRange">
-            <label htmlFor="rangeOffer">
-              Nombre d'offres à afficher : {range}
-            </label>
-            <input
-              id="rangeOffer"
-              type="range"
-              min="1"
-              max="38"
-              defaultValue={range}
-              onChange={(e) => {
-                // console.log(e.target);
-                setRange(e.target.value);
-              }}
-            />
-          </div>
-
-          <Form>
-            <div className="priceOrder">
-              <Form.Label htmlFor="custom-switch">Prix croissant</Form.Label>
-              <Form.Check
-                type="switch"
-                id="custom-switch"
-                onChange={(e) => {
-                  if (priceOrder === "price-asc") setPriceOrder("price-desc");
-                  if (priceOrder === "price-desc") setPriceOrder("price-asc");
-                }}
-              />
-              <Form.Label htmlFor="custom-switch">Prix décroissant</Form.Label>
-            </div>
-          </Form>
-          <div className="priceRange">
-            <span>Prix Min {priceMin}$ :</span>
-            <MultiRangeSlider
-              style={{
-                border: "none",
-                boxShadow: "none",
-                padding: "15px 10px",
-                minWidth: "300px",
-              }}
-              min={0}
-              max={500}
-              step={10}
-              label={false}
-              minValue={priceMin}
-              maxValue={priceMax}
-              ruler="false"
-              barLeftColor="white"
-              barInnerColor="#015CC8"
-              barRightColor="white"
-              thumbLeftColor="#015CC8"
-              thumbRightColor="#015CC8"
-              onChange={(e) => {
-                setPriceMin(e.minValue);
-                setPriceMax(e.maxValue);
-              }}
-            />
-            <span>: {priceMax}$ Prix Max</span>
-          </div>
-        </div>
+        <FilterBar
+          setPriceMax={setPriceMax}
+          priceMax={priceMax}
+          priceMin={priceMin}
+          setPriceMin={setPriceMin}
+          setPriceOrder={setPriceOrder}
+          priceOrder={priceOrder}
+          setRange={setRange}
+          range={range}
+        />
 
         <div className="display-cards">
           {data.offers.map((offre, index) => {

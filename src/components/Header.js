@@ -4,6 +4,7 @@ import logo from "../assets/logo.svg";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({
   handleShow,
@@ -13,6 +14,7 @@ const Header = ({
   searchValue,
   setSearchValue,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="wrapper">
       <div className="container-header">
@@ -56,7 +58,18 @@ const Header = ({
               </Button>
             )}
           </Link>
-          <Button variant="info m-1" style={{ color: "white" }}>
+
+          <Button
+            variant="info m-1"
+            style={{ color: "white" }}
+            onClick={() => {
+              if (Cookies.get("token")) {
+                navigate("/publish");
+              } else {
+                handleShow();
+              }
+            }}
+          >
             Vend tes articles
           </Button>
         </div>

@@ -207,3 +207,13 @@ footer {
   display: flex;
   align-items: center;
 }
+
+.container-Publish {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-publish {
+  width: 50vw;
+}
