@@ -26,7 +26,7 @@ const Home = ({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers?title=${searchValue}&priceMin=${priceMin}&priceMax=${priceMax}&sort=${priceOrder}&page=${currentPage}&limit=${range}`
+          `https://vinted--difficult-club--56xblq4s6sr6.code.run/offers?title=${searchValue}&priceMin=${priceMin}&priceMax=${priceMax}&sort=${priceOrder}&page=${currentPage}&limit=${range}`
         );
         // const pages = [];
 

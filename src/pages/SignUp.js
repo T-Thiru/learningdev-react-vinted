@@ -25,12 +25,17 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
       formData.append("password", password);
       formData.append("newsletter", newsletter);
       if (profilPic) {
-        formData.append("picture", profilPic);
+        formData.append("avatar", profilPic);
       }
 
       const resToken = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        formData
+        "https://vinted--difficult-club--56xblq4s6sr6.code.run/user/signup",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       // console.log(resToken.data);
       if (resToken.data.token) {

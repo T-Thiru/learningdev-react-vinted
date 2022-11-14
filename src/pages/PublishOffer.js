@@ -30,7 +30,8 @@ const PublishOffer = ({ token }) => {
       formData.append("brand", brand);
       formData.append("size", size);
       formData.append("color", color);
-      console.log(Object.values(offerPics));
+      formData.append(`picture`, offerPics[0]);
+      // console.log(Object.values(offerPics));
       const picsTab = Object.values(offerPics);
       if (picsTab) {
         for (let i = 0; i < picsTab.length; i++) {
@@ -41,7 +42,7 @@ const PublishOffer = ({ token }) => {
       }
 
       const publish = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+        "https://vinted--difficult-club--56xblq4s6sr6.code.run/offer/publish",
         formData,
         {
           headers: {
