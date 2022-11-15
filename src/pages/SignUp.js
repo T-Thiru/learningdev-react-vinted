@@ -25,7 +25,7 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
       formData.append("password", password);
       formData.append("newsletter", newsletter);
       if (profilPic) {
-        formData.append("avatar", Object.values(profilPic));
+        formData.append("picture", profilPic);
       }
 
       const resToken = await axios.post(
