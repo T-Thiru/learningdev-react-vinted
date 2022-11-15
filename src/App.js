@@ -10,6 +10,13 @@ import LogIn from "./pages/LogIn";
 import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
 import PublishOffer from "./pages/PublishOffer";
+import Payement from "./pages/Payement";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51M4OtRG9h68YRSFljOfT9nwXDIoFU7GIIwr8xrXgAbF0O2HupUkwx0MGiZ5uSONqgvnnr0yww2KowSk7L45FvBGP0026yuVNtk"
+);
 
 function App() {
   const [data, setData] = useState();
@@ -18,6 +25,7 @@ function App() {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [connectedUser, setConectedUser] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -54,7 +62,7 @@ function App() {
             />
           }
         />
-        <Route path={`/offer/:id`} element={<Offer />} />
+        <Route path="/offer/:id" element={<Offer handleShow={handleShow} />} />
         {/* <Route
           path="/signup"
           element={<SignUp token={token} setToken={setToken} />}
@@ -73,6 +81,19 @@ function App() {
         />
 
         {/* <Route path="/publish" element={<PublishOffer />} /> */}
+
+        <Route
+          path="/payment"
+          element={
+            Cookies.get("token") ? (
+              <Elements stripe={stripePromise}>
+                <Payement token={token} connectedUser={connectedUser} />
+              </Elements>
+            ) : (
+              <SignUp token={token} setToken={setToken} />
+            )
+          }
+        />
       </Routes>
       <Modal
         show={show}
@@ -86,6 +107,7 @@ function App() {
             handleShow1={handleShow1}
             handleClose={handleClose}
             setToken={setToken}
+            setConectedUser={setConectedUser}
           />
         </Modal.Body>
       </Modal>
@@ -101,6 +123,7 @@ function App() {
             handleShow={handleShow}
             handleClose1={handleClose1}
             setToken={setToken}
+            setConectedUser={setConectedUser}
           />
         </Modal.Body>
       </Modal>

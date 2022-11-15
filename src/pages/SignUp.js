@@ -6,7 +6,13 @@ import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
+const SignUp = ({
+  token,
+  setToken,
+  handleShow1,
+  handleClose,
+  setConectedUser,
+}) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,6 +46,7 @@ const SignUp = ({ token, setToken, handleShow1, handleClose }) => {
       // console.log(resToken.data);
       if (resToken.data.token) {
         setToken(resToken.data.token);
+        setConectedUser(resToken.data.id);
         Cookies.set("token", token, { expires: 7 });
         navigate("/");
         handleClose();

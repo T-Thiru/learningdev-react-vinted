@@ -4,8 +4,11 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
-const Offer = () => {
+const Offer = ({ handleShow }) => {
+  const navigate = useNavigate();
   const [dataOffer, setDataOffer] = useState();
   const [isLoadingOffer, setIsLoadingOffer] = useState(true);
   const { id } = useParams();
@@ -80,11 +83,32 @@ const Offer = () => {
                 <h5>{dataOffer.owner?.account?.username}</h5>
               </span>
             </div>
-            <Button variant="info m-1" style={{ color: "white" }}>
-              Vend tes articles
+            <Button
+              variant="info m-1"
+              style={{ color: "white" }}
+              onClick={() => {
+                if (Cookies.get("token")) {
+                  navigate("/payment", {
+                    state: {
+                      id: dataOffer.id,
+                      price: dataOffer.product_price,
+                      name: dataOffer.product_name,
+                    },
+                  });
+                } else {
+                  handleShow();
+                }
+              }}
+            >
+              Acheter l'article
             </Button>
           </div>
         </div>
+      </div>
+      <div className="btn-delete wrapper">
+        <Button variant="danger mt-5 " style={{ color: "white" }}>
+          Supprimer l'offre
+        </Button>
       </div>
     </div>
   );

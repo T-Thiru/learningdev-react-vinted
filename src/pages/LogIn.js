@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const LogIn = ({ handleShow, handleClose1, token, setToken }) => {
+const LogIn = ({
+  handleShow,
+  handleClose1,
+  token,
+  setToken,
+  setConectedUser,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorLogIn, setErrorLogIn] = useState("");
@@ -27,6 +33,7 @@ const LogIn = ({ handleShow, handleClose1, token, setToken }) => {
       // console.log(resToken.data);
       if (resToken.data.token) {
         setToken(resToken.data.token);
+        setConectedUser(resToken.data.id);
         Cookies.set("token", token, { expires: 7 });
         navigate("/");
         handleClose1();
