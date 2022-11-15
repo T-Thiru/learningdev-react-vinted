@@ -11,7 +11,7 @@ const Card = ({ offre }) => {
       <div className="card-container">
         <div className="avatar">
           <img
-            src={offre.owner?.account?.avatar?.secure_url}
+            src={offre.owner?.account?.avatar[0]?.secure_url}
             alt={offre.owner?.account.username}
           />
           <span>{offre.owner?.account?.username}</span>
