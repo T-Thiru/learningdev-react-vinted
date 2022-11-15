@@ -30,14 +30,14 @@ const PublishOffer = ({ token }) => {
       formData.append("brand", brand);
       formData.append("size", size);
       formData.append("color", color);
-      formData.append(`picture`, offerPics[0]);
+      // formData.append(`picture`, offerPics[0]);
       // console.log(Object.values(offerPics));
       const picsTab = Object.values(offerPics);
       if (picsTab) {
         for (let i = 0; i < picsTab.length; i++) {
           // pics.push(picture.files[i]);
           //   console.log(picsTab[i]);
-          formData.append(`pictures${[i]}`, picsTab[i]);
+          formData.append(`picture${[i]}`, picsTab[i]);
         }
       }
 
