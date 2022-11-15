@@ -37,7 +37,7 @@ const Offer = ({ handleShow, token }) => {
         { id: dataOffer._id },
         {
           headers: {
-            authorization: token,
+            authorization: `Bearer ${token}`,
           },
         }
       );
