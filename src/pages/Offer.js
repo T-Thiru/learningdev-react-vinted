@@ -7,7 +7,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const Offer = ({ handleShow }) => {
+const Offer = ({ handleShow, token }) => {
   const navigate = useNavigate();
   const [dataOffer, setDataOffer] = useState();
   const [isLoadingOffer, setIsLoadingOffer] = useState(true);
@@ -29,6 +29,27 @@ const Offer = ({ handleShow }) => {
 
     fetchData();
   }, [setDataOffer, setIsLoadingOffer, id]);
+
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(
+        "https://vinted--difficult-club--56xblq4s6sr6.code.run/offer/delete",
+        { id: dataOffer._id },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      if (response) {
+        console.log(response);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return isLoadingOffer ? (
     <p>LOADING...</p>
   ) : (
@@ -84,6 +105,7 @@ const Offer = ({ handleShow }) => {
               </span>
             </div>
             <Button
+              disabled={dataOffer.paid}
               variant="info m-1"
               style={{ color: "white" }}
               onClick={() => {
@@ -106,7 +128,11 @@ const Offer = ({ handleShow }) => {
         </div>
       </div>
       <div className="btn-delete wrapper">
-        <Button variant="danger mt-5 " style={{ color: "white" }}>
+        <Button
+          variant="danger mt-5 "
+          style={{ color: "white" }}
+          onClick={handleDelete}
+        >
           Supprimer l'offre
         </Button>
       </div>
