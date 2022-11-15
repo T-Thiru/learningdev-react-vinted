@@ -12,6 +12,7 @@ const LogIn = ({
   token,
   setToken,
   setConectedUser,
+  setavatarUser,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,6 +35,7 @@ const LogIn = ({
       if (resToken.data.token) {
         setToken(resToken.data.token);
         setConectedUser(resToken.data.id);
+        setavatarUser(resToken.data.account?.avatar?.secure_url);
         Cookies.set("token", token, { expires: 7 });
         navigate("/");
         handleClose1();

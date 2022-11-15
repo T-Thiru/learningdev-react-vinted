@@ -26,6 +26,7 @@ function App() {
   const [show1, setShow1] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [connectedUser, setConectedUser] = useState("");
+  const [avatarUser, setavatarUser] = useState();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -42,6 +43,8 @@ function App() {
           setToken={setToken}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
+          avatarUser={avatarUser}
+          setavatarUser={setavatarUser}
         />
       </header>
 
@@ -127,6 +130,7 @@ function App() {
             handleClose1={handleClose1}
             setToken={setToken}
             setConectedUser={setConectedUser}
+            setavatarUser={setavatarUser}
           />
         </Modal.Body>
       </Modal>

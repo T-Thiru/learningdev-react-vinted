@@ -13,6 +13,8 @@ const Header = ({
   setToken,
   searchValue,
   setSearchValue,
+  avatarUser,
+  setavatarUser,
 }) => {
   const navigate = useNavigate();
   return (
@@ -35,6 +37,9 @@ const Header = ({
             />
           </Form.Group>
         </div>
+        <div className="avatar">
+          {avatarUser ? <img src={avatarUser} alt=""></img> : ""}
+        </div>
         <div className="navigation">
           <Link>
             <Button variant="outline-info m-1" onClick={handleShow}>
@@ -48,6 +53,7 @@ const Header = ({
                 onClick={() => {
                   Cookies.remove("token");
                   setToken(null);
+                  setavatarUser("");
                 }}
               >
                 Se deconnecter
