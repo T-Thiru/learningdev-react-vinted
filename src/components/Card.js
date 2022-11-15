@@ -22,6 +22,11 @@ const Card = ({ offre }) => {
             <span>{offre.product_price}$</span>
             <span>{offre.product_details[1].TAILLE}</span>
             <span>{offre.product_details[0].MARQUE}</span>
+            {offre.paid ? (
+              <strong style={{ color: "red" }}>Produit déjà acheter</strong>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
