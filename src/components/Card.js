@@ -20,8 +20,8 @@ const Card = ({ offre }) => {
           <img src={offre.product_image?.secure_url} alt="" />
           <div className="price-detail">
             <span>{offre.product_price}$</span>
-            <span>{offre.product_details[1].TAILLE}</span>
-            <span>{offre.product_details[0].MARQUE}</span>
+            <span>{offre.product_details[0].taille}</span>
+            <span>{offre.product_details[0].marque}</span>
             {offre.paid ? (
               <strong style={{ color: "red" }}>Produit déjà acheter</strong>
             ) : (
