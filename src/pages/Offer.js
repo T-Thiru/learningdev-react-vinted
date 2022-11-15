@@ -33,7 +33,7 @@ const Offer = ({ handleShow, token }) => {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        "http://localhost:3100/offer/delete",
+        "https://vinted--difficult-club--56xblq4s6sr6.code.run/offer/delete",
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -131,12 +131,14 @@ const Offer = ({ handleShow, token }) => {
       </div>
       <div className="btn-delete wrapper">
         <Button
+          disabled={token === dataOffer.owner.token ? false : true}
           variant="danger mt-5 "
           style={{ color: "white" }}
           onClick={handleDelete}
         >
           Supprimer l'offre
         </Button>
+        <p>Seul le createur de l'annonce peut supprimer cette annonce</p>
       </div>
     </div>
   );
