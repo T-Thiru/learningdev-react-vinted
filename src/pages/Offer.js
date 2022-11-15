@@ -19,7 +19,7 @@ const Offer = ({ handleShow }) => {
         const response = await axios.get(
           `https://vinted--difficult-club--56xblq4s6sr6.code.run/offer/${id}`
         );
-
+        // console.log(response.data);
         setDataOffer(response.data);
         setIsLoadingOffer(false);
       } catch (error) {
@@ -90,7 +90,7 @@ const Offer = ({ handleShow }) => {
                 if (Cookies.get("token")) {
                   navigate("/payment", {
                     state: {
-                      id: dataOffer.id,
+                      offer: dataOffer._id,
                       price: dataOffer.product_price,
                       name: dataOffer.product_name,
                     },

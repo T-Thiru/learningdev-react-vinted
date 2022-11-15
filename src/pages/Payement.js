@@ -7,14 +7,18 @@ import { useLocation } from "react-router-dom";
 
 const Payement = ({ connectedUser }) => {
   const [completed, setCompleted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
-  const { id, price, name } = location.state;
+  const { offer, price, name } = location.state;
   const stripe = useStripe();
   const elements = useElements();
+
+  //   console.log(offer);
 
   const handlePayment = async (e) => {
     try {
       e.preventDefault();
+      setIsLoading(true);
       // On récupère ici les données bancaires que l'utilisateur rentre
       const cardElement = elements.getElement(CardElement);
 
@@ -32,13 +36,14 @@ const Payement = ({ connectedUser }) => {
         `https://vinted--difficult-club--56xblq4s6sr6.code.run/payment`,
         {
           stripeToken: stripeToken,
-          offerId: id,
+          id: offer,
           client: connectedUser,
         }
       );
       console.log(response.data);
       // Si la réponse du serveur est favorable, la transaction a eu lieu
       if (response.data.status === "succeeded") {
+        setIsLoading(false);
         setCompleted(true);
       }
     } catch (error) {
@@ -77,9 +82,13 @@ const Payement = ({ connectedUser }) => {
               (frais de protection et frais de port inclus)
             </p>
           </div>
-          {!completed ? (
+          <CardElement />
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : completed ? (
+            <p>Paiement effectué ! </p>
+          ) : (
             <div>
-              <CardElement />
               <Button
                 type="submit"
                 variant="success mt-5 w-100"
@@ -88,8 +97,6 @@ const Payement = ({ connectedUser }) => {
                 Pay
               </Button>
             </div>
-          ) : (
-            <span>Paiement effectué ! </span>
           )}
         </form>
       </div>
