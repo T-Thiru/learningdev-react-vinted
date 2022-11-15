@@ -33,11 +33,13 @@ const Offer = ({ handleShow, token }) => {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        "https://vinted--difficult-club--56xblq4s6sr6.code.run/offer/delete",
-        { id: dataOffer._id },
+        "http://localhost:3100/offer/delete",
         {
           headers: {
             authorization: `Bearer ${token}`,
+          },
+          data: {
+            id: dataOffer._id,
           },
         }
       );
