@@ -114,6 +114,7 @@ function App() {
             handleClose={handleClose}
             setToken={setToken}
             setConectedUser={setConectedUser}
+            setavatarUser={setavatarUser}
           />
         </Modal.Body>
       </Modal>
