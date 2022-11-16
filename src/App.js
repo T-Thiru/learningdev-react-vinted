@@ -96,7 +96,14 @@ function App() {
                 <Payement token={token} connectedUser={connectedUser} />
               </Elements>
             ) : (
-              <SignUp token={token} setToken={setToken} />
+              <SignUp
+                token={token}
+                handleShow1={handleShow1}
+                handleClose={handleClose}
+                setToken={setToken}
+                setConectedUser={setConectedUser}
+                setavatarUser={setavatarUser}
+              />
             )
           }
         />
