@@ -10,6 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Payement = ({ connectedUser }) => {
   const [completed, setCompleted] = useState(false);
@@ -18,6 +19,7 @@ const Payement = ({ connectedUser }) => {
   const { offer, price, name } = location.state;
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   //   console.log(offer);
 
@@ -51,6 +53,7 @@ const Payement = ({ connectedUser }) => {
       if (response.data.status === "succeeded") {
         setIsLoading(false);
         setCompleted(true);
+        setTimeout(navigate("/"), 2500);
       }
     } catch (error) {
       console.log(error.message);
