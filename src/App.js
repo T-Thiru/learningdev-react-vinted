@@ -117,6 +117,7 @@ function App() {
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <SignUp
+            token={token}
             handleShow1={handleShow1}
             handleClose={handleClose}
             setToken={setToken}
