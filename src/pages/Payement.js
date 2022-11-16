@@ -1,7 +1,13 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import {
+  useStripe,
+  useElements,
+  PaymentElement,
+  CardElement,
+  IbanElement,
+} from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
@@ -83,6 +89,8 @@ const Payement = ({ connectedUser }) => {
             </p>
           </div>
           <CardElement />
+          {/* <IbanElement /> */}
+          {/* <PaymentElement /> */}
           {isLoading ? (
             <p>Loading...</p>
           ) : completed ? (
