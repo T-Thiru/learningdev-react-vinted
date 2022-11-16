@@ -73,7 +73,7 @@ const Payement = ({ connectedUser }) => {
           <div className="payment-total">
             <div className="align-flexBetween">
               <h3>Total</h3>
-              <p>total</p>
+              <p>{(price + 0.4 + 0.8).toFixed(2)}$</p>
             </div>
             <p>
               il ne vous reste plus qu'une etape pour vous offrir
