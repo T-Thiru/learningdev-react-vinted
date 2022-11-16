@@ -165,7 +165,7 @@ const PublishOffer = ({ token }) => {
           <Form.Group className="m-1">
             <Form.Label>Prix</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               placeholder="Prix"
               value={price}
               onChange={(e) => {
