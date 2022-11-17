@@ -38,5 +38,5 @@ const Bannier = ({ handleShow }) => {
     </section>
   );
 };
-
+///////
 export default Bannier;
