@@ -1,13 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import {
-  useStripe,
-  useElements,
-  PaymentElement,
-  CardElement,
-  IbanElement,
-} from "@stripe/react-stripe-js";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
